@@ -22,6 +22,8 @@ The controller will now listen for requests on localhost:8000
 
 `$ go run creategraph.go`
 
+It take a minute or so to get all vertices and edges up and running..
+
 `$ docker logs vertex3`
 
 ### To add vertex4
