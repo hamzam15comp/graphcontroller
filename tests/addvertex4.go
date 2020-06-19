@@ -18,21 +18,21 @@ func main() {
 
 	payload := &bytes.Buffer{}
 	writer := multipart.NewWriter(payload)
-	file, errFile1 := os.Open("/hamzam/congraph/vertex.json")
+	file, errFile1 := os.Open("vertex.json")
 	defer file.Close()
 	part1, errFile1 := writer.CreateFormFile(
 		"vertex",
-		filepath.Base("/hamzam/congraph/vertex.json"),
+		filepath.Base("vertex.json"),
 	)
 	_, errFile1 = io.Copy(part1, file)
 	if errFile1 != nil {
 		fmt.Println(errFile1)
 	}
-	file, errFile2 := os.Open("/hamzam/congraph/vertex4.zip")
+	file, errFile2 := os.Open("vertex4.zip")
 	defer file.Close()
 	part2, errFile2 := writer.CreateFormFile(
 		"vertex4", filepath.Base(
-		"/hamzam/congraph/vertex4.zip"),
+		"vertex4.zip"),
 	)
 	_, errFile2 = io.Copy(part2, file)
 	if errFile2 != nil {

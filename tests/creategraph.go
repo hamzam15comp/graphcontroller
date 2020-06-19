@@ -18,61 +18,61 @@ func main() {
 
 	payload := &bytes.Buffer{}
 	writer := multipart.NewWriter(payload)
-	file, errFile1 := os.Open("/hamzam/congraph/graph.json")
+	file, errFile1 := os.Open("graph.json")
 	defer file.Close()
 	part1, errFile1 := writer.CreateFormFile(
 		"graph",
-		filepath.Base("/hamzam/congraph/graph.json"),
+		filepath.Base("graph.json"),
 	)
 	_, errFile1 = io.Copy(part1, file)
 	if errFile1 != nil {
 		fmt.Println(errFile1)
 	}
-	file, errFile2 := os.Open("/hamzam/congraph/vertex1.zip")
+	file, errFile2 := os.Open("vertex1.zip")
 	defer file.Close()
 	part2, errFile2 := writer.CreateFormFile(
 		"vertex1",
-		filepath.Base("/hamzam/congraph/vertex1.zip"),
+		filepath.Base("vertex1.zip"),
 	)
 	_, errFile2 = io.Copy(part2, file)
 	if errFile2 != nil {
 		fmt.Println(errFile2)
 	}
-	file, errFile3 := os.Open("/hamzam/congraph/vertex2.zip")
+	file, errFile3 := os.Open("vertex2.zip")
 	defer file.Close()
 	part3, errFile3 := writer.CreateFormFile(
 		"vertex2",
-		filepath.Base("/hamzam/congraph/vertex2.zip"),
+		filepath.Base("vertex2.zip"),
 	)
 	_, errFile3 = io.Copy(part3, file)
 	if errFile3 != nil {
 		fmt.Println(errFile3)
 	}
-	file, errFile4 := os.Open("/hamzam/congraph/edge1.zip")
+	file, errFile4 := os.Open("edge1.zip")
 	defer file.Close()
 	part4, errFile4 := writer.CreateFormFile(
 		"edge1",
-		filepath.Base("/hamzam/congraph/edge1.zip"),
+		filepath.Base("edge1.zip"),
 	)
 	_, errFile4 = io.Copy(part4, file)
 	if errFile4 != nil {
 		fmt.Println(errFile4)
 	}
-	file, errFile5 := os.Open("/hamzam/congraph/vertex3.zip")
+	file, errFile5 := os.Open("vertex3.zip")
 	defer file.Close()
 	part5, errFile5 := writer.CreateFormFile(
 		"vertex3",
-		filepath.Base("/hamzam/congraph/vertex3.zip"),
+		filepath.Base("vertex3.zip"),
 	)
 	_, errFile5 = io.Copy(part5, file)
 	if errFile5 != nil {
 		fmt.Println(errFile5)
 	}
-	file, errFile6 := os.Open("/hamzam/congraph/edge2.zip")
+	file, errFile6 := os.Open("edge2.zip")
 	defer file.Close()
 	part6, errFile6 := writer.CreateFormFile(
 		"edge2",
-		filepath.Base("/hamzam/congraph/edge2.zip"),
+		filepath.Base("edge2.zip"),
 	)
 	_, errFile6 = io.Copy(part6, file)
 	if errFile6 != nil {
