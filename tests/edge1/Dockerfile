@@ -1,0 +1,7 @@
+FROM rabbitmq:3-management
+WORKDIR /
+COPY . .
+EXPOSE 5672
+EXPOSE 15672
+EXPOSE 5673
+

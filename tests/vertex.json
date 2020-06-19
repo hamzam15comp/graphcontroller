@@ -1,0 +1,16 @@
+{
+  "vertexname":"vertex4",
+  "vertexid":4,
+  "pub":[
+    {
+      "edgename":"edge2",
+      "edgeid":2
+    }
+  ],
+  "sub":[
+    {
+      "edgename":"edge1",
+      "edgeid":1
+    }
+  ]
+}
