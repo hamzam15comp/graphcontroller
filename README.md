@@ -19,17 +19,23 @@ The controller will now listen for requests on localhost:8000
 
 ### To test the deployment (run in a different terminal)
 `$ cd tests/`
+
 `$ go run creategraph.go`
+
 `$ docker logs vertex3`
 
 ### To add vertex4
 `$ cd tests/`
+
 `$ go run addvertex4.go`
+
 `$ docker logs vertex3`
 
 ### To remove vertex2
 `$ cd tests/`
+
 `$ go run remvertex2.go`
+
 `$ docker logs vertex3`
 
 
