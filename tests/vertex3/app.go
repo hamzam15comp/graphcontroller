@@ -4,7 +4,7 @@ import (
 	"github.com/hamzam15comp/vertex"
 	"log"
 	"os"
-	"fmt"
+	"io/ioutil"
 )
 
 var logger *log.Logger
@@ -16,7 +16,7 @@ func logInit() {
 		log.Println(err)
 	}
 
-	logger = log.New(f, "[INFO]", log.LstdFlags)
+	logger = log.New(f, "", log.Lmicroseconds | log.LUTC)
 }
 
 func main() {
@@ -31,13 +31,25 @@ func main() {
 		if err != nil {
 			logger.Println(err)
 		}
-		logger.Println(datatype, string(data))
-                d := string(data)
-                d = d + "\n Vertex3 says Hello!"
-                data = []byte(d)
-		logger.Println(datatype, string(data))
-		fmt.Println(string(data))
-		fmt.Println("----------------------------------")
+
+                logger.Println(
+                        "$R$",
+                        len(string(data)+datatype),
+                        "$",
+                        datatype,
+                )
+		fileName := "images/" + datatype + ".jpg"
+		file, err := os.Create(fileName)
+		if err != nil {
+		        logger.Println(err)
+		        continue
+		}
+		file.Close()
+		err = ioutil.WriteFile(fileName, data, 0666)
+		if err != nil {
+		        logger.Println(err)
+		        continue
+		}
 
 	}
 }

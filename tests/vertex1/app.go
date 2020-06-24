@@ -5,6 +5,10 @@ import (
 	"log"
 	"os"
 	"time"
+	"strconv"
+	"io"
+	"net/http"
+	"io/ioutil"
 )
 
 var logger *log.Logger
@@ -16,8 +20,34 @@ func logInit() {
 		log.Println(err)
 	}
 
-	logger = log.New(f, "[INFO]", log.LstdFlags)
+	logger = log.New(f, "", log.Lmicroseconds | log.LUTC)
 }
+
+func getImage(name string)([]byte){
+	fullUrlFile := "https://storage.needpix.com/thumbs/human-740259_1280.jpg"
+	fileName := "images/" + name + ".jpg"
+	file, err := os.Create(fileName)
+	if err != nil {
+		return []byte{}
+	}
+	resp, err := http.Get(fullUrlFile)
+	if err != nil {
+		return []byte{}
+	}
+	_, err = io.Copy(file, resp.Body)
+	if err != nil {
+		return []byte{}
+	}
+	file.Close()
+	resp.Body.Close()
+
+	data, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		return []byte{}
+	}
+	return data
+}
+
 
 func main() {
 	logInit()
@@ -26,15 +56,28 @@ func main() {
 		logger.Println("Error: ", err)
 	}
 	logger.Println("Created IN and OUT pipe")
-	for {
+	i := 1
+	time.Sleep(120 * time.Second)
 
-		datatype := "message"
-		data := []byte("Vertex1 says Hello!")
-		logger.Println(datatype, string(data))
-		time.Sleep(10 * time.Second)
+	for {
+		datatype := "img" + strconv.Itoa(i)
+		data := getImage(datatype)
+		if len(data) == 0 {
+			continue
+		}
+
+		logger.Println(
+			"$S$",
+			len(string(data)+datatype),
+			"$",
+			datatype,
+		)
+
 		err = vertex.WriteData("all", datatype, data)
 		if err != nil {
 			logger.Println(err)
 		}
+		i = i + 1
+		time.Sleep(60 * time.Second)
 	}
 }

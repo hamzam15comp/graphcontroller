@@ -1,0 +1,4 @@
+hamzam>tests$ go run replaceV2V4.go 
+Created Vertex4 in 10.854879615s
+Removed Vertex2 in 10.424670999s
+

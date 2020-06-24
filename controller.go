@@ -197,7 +197,7 @@ func createGraph(w http.ResponseWriter, r *http.Request) {
 		BuildImage(e.EdgeName)
 		CreateContainer(e.EdgeName)
 	}
-	time.Sleep(30*time.Second)
+	time.Sleep(20*time.Second)
 	for _, v := range graph.VertexArr {
 		getFile(r, v.VertexName)
 		BuildImage(v.VertexName)
@@ -214,7 +214,7 @@ func addVertex(w http.ResponseWriter, r *http.Request) {
 	getFile(r, v.VertexName)
 	BuildImage(v.VertexName)
 	CreateContainer(v.VertexName)
-	time.Sleep(20*time.Second)
+	time.Sleep(10*time.Second)
 	addConnections(v)
 }
 

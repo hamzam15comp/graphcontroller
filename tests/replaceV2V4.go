@@ -4,15 +4,15 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 func main() {
-
+	start := time.Now()
 	url := "http://localhost:8000/addVertex"
 	method := "POST"
 
@@ -50,9 +50,22 @@ func main() {
 		fmt.Println(err)
 	}
 	req.Header.Set("Content-Type", writer.FormDataContentType())
-	res, err := client.Do(req)
-	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
+	_, err = client.Do(req)
 
-	fmt.Println(string(body))
+	fmt.Println("Created Vertex4 in",time.Since(start))
+	time.Sleep(60*time.Second)
+	start = time.Now()
+
+	url = "http://localhost:8000/removeVertex/vertex2"
+	method = "GET"
+	client = &http.Client {
+	}
+	req, err = http.NewRequest(method, url, nil)
+	if err != nil {
+	  fmt.Println(err)
+	}
+	_, err = client.Do(req)
+	fmt.Println("Removed Vertex2 in",time.Since(start))
+
+
 }
